@@ -1,0 +1,8 @@
+/bin/simple_algorithms
+
+/simple_algorithms/build/CMakeFiles
+/simple_algorithms/build/CMakeCache.txt
+/simple_algorithms/build/Makefile
+
+*.cmake
+*.swp
