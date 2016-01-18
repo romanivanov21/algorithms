@@ -20,5 +20,13 @@ int main( void )
 			std::cout<<"число не простое"<<std::endl;
 		}
 	}
+	for( int i = 0; i < 5; i++ )
+	{
+		for(int j = 5; j != 0; j-- )
+		{
+			std::cout<<i<<"^"<<j<<": ";
+			std::cout<<power(i,j)<<std::endl;
+		}
+	}
 	return 0;
 }

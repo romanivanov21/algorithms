@@ -53,3 +53,19 @@ bool is_number_prime( int n )
 	}
 	return true;
 }
+
+double power( double a, int n )
+{
+	double res = 1;
+	double current_value = a; // a^1
+	while( n > 0 )
+	{
+		if( n & 1 == 1 )
+		{
+			res = current_value * res; // a^1 * 1; 
+		}
+		current_value = current_value * current_value;
+		n = n >> 1;
+	}
+	return res;
+}
