@@ -31,3 +31,25 @@ int find_max( const int *array, unsigned int size )
 	}
 	return max;
 }
+
+int binary_find( const int *array, unsigned int size, int item )
+{
+	assert( array );
+	assert( size > 0 );
+
+	int first = array[0];
+	int last  = array[size];
+	while( first < last )
+	{
+		int mid = ( first + last ) / 2;
+		if( item <= array[mid] )
+		{
+			last = mid;
+		}
+		else
+		{
+			first = mid + 1;
+		}
+	}
+	return ( first == size || array[first] != item ) ? -1 : first; 
+}
