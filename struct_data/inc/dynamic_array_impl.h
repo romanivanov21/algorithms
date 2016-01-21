@@ -1,3 +1,6 @@
+#ifndef _DYNAMIC_ARRAY_H_
+#define _DYNAMIC_ARRAY_H_
+
 #include <string.h>
 #include <assert.h>
 
@@ -74,3 +77,5 @@ void dynamic_array<T>::grow( void )
 	buffer_ = new_buffer;
 	buffer_size_ = new_buffer_size;
 }
+
+#endif //_DYNAMIC_ARRAY_H_
