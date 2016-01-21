@@ -6,8 +6,12 @@ case "$1" in
 	"-simple_algorithms" )
 		./simple_algorithms/make.sh
 	;;
+	"-struct_data" )
+		./struct_data/make.sh
+	;;
 	"-all"     )
 		./simple_algorithms/make.sh
+		./struct_data/make.sh
 	;;
 	*)
 	echo "Options:" 

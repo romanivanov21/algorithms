@@ -1,8 +1,13 @@
 /bin/simple_algorithms
+/bin/struct_data
 
 /simple_algorithms/build/CMakeFiles
 /simple_algorithms/build/CMakeCache.txt
 /simple_algorithms/build/Makefile
+
+/struct_data/build/CMakeFiles
+/struct_data/build/CMakeCache.txt
+/struct_data/build/Makefile
 
 *.cmake
 *.swp
