@@ -37,8 +37,8 @@ int binary_find( const int *array, unsigned int size, int item )
 	assert( array );
 	assert( size > 0 );
 
-	int first = array[0];
-	int last  = array[size];
+	int first = 0;
+	int last  = size;
 	while( first < last )
 	{
 		int mid = ( first + last ) / 2;
