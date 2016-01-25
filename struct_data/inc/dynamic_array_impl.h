@@ -126,7 +126,7 @@ T* dynamic_array<T>::operator&( unsigned int i ) const
 }
 
 template <typename T>
-T dynamic_array<T>::operator[]( unsigned int i ) const
+T& dynamic_array<T>::operator[]( unsigned int i ) const
 {
 	assert( ( i >= 0 ) && ( i < real_size_ ) && ( buffer_ != 0 ) );
 	if( i < real_size_)

@@ -1,10 +1,13 @@
 #include <iostream>
+#include <vector>
 
 #include "dynamic_array.h"
 
 int main( void )
 {
-	dynamic_array<int> v;
+	dynamic_array<int> v(1);
+	v[0] = 5;
+	std::cout<<"v[0] = "<<v[0]<<std::endl;
 	for( unsigned int i = 50; i > 0; i-- )
 	{
 		v.push_back( i );

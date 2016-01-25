@@ -34,7 +34,7 @@ public:
 
 	//Доступ по индексу
 	T  at( unsigned int i ) const;
-	T  operator[]( unsigned int i ) const;
+	T&  operator[]( unsigned int i ) const;
 	T* operator&( unsigned int i )const;
 
 	void push_back( T value );
