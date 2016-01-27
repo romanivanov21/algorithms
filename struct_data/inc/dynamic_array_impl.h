@@ -15,6 +15,7 @@ dynamic_array<T>::dynamic_array( unsigned int real_size )
 	initial_size_ = 10;
 	buffer_size_ = real_size_ + initial_size_;
 	buffer_ = new T[buffer_size_];
+	memset( buffer_, 0x00, real_size_ );
 }
 
 template <typename T>
@@ -106,7 +107,7 @@ void dynamic_array<T>::insert( unsigned int i, T value)
 template <typename T>
 void dynamic_array<T>::erase( unsigned int i )
 {
-	assert( i > 0 && i < real_size_ );
+	assert( i >= 0 && i < real_size_ );
 	memcpy( &buffer_[i + 1], &buffer_[i], (real_size_-i -1)) ;
 	real_size_--;
 }
@@ -119,10 +120,15 @@ T dynamic_array<T>::at( unsigned int i )const
 }
 
 template <typename T>
-T* dynamic_array<T>::operator&( unsigned int i ) const
+dynamic_array<T>* dynamic_array<T>::operator&( )
 {
-	assert( ( i >= 0 ) && ( i < real_size_ ) && ( buffer_ != 0 ) );
-	return &buffer_[i];
+	return this;
+}
+
+template <typename T>
+dynamic_array<T> dynamic_array<T>::operator*( )
+{
+	return *this;
 }
 
 template <typename T>
@@ -150,7 +156,7 @@ void dynamic_array<T>::push_back( T value )
 template <typename T>
 void dynamic_array<T>::pop_back( void )
 {
-	buffer_[real_size_] = 0x00;
+	buffer_[real_size_-1] = 0x00;
 	real_size_ --;
 }
 

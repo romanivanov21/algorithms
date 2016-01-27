@@ -35,7 +35,8 @@ public:
 	//Доступ по индексу
 	T  at( unsigned int i ) const;
 	T&  operator[]( unsigned int i ) const;
-	T* operator&( unsigned int i )const;
+	dynamic_array<T>* operator&( );
+	dynamic_array<T>  operator*( );
 
 	void push_back( T value );
 	void pop_back( void );

@@ -20,7 +20,7 @@ SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 set( PROJECT struct_data )
 
-set( SOURCES ../src/main.cpp  )
+set( SOURCES ../src/main.cpp ../src/dynamic_array_test.cpp )
 
 project( ${PROJECT} )
 
