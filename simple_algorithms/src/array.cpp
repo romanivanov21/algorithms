@@ -1,7 +1,8 @@
 #include "array.h"
+
 #include <assert.h>
 
-int find_item( const int *array, unsigned int size, int item )
+int find_item( const int *array, size_t size, int item )
 {
 	assert( array );
 	assert( size > 0);
@@ -16,7 +17,7 @@ int find_item( const int *array, unsigned int size, int item )
 	return -1;
 }
 
-int find_max( const int *array, unsigned int size )
+int find_max( const int *array, size_t size )
 {
 	assert( array );
 	assert( size > 0);

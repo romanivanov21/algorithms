@@ -5,7 +5,7 @@ template <typename T>
 class dynamic_array
 {
 public:
-	dynamic_array( void );
+	dynamic_array();
 	dynamic_array( unsigned int real_size );
 
 	//конструктор копирования
@@ -35,20 +35,21 @@ public:
 	//Доступ по индексу
 	T  at( unsigned int i ) const;
 	T&  operator[]( unsigned int i ) const;
-	dynamic_array<T>* operator&( );
-	dynamic_array<T>  operator*( );
+	dynamic_array<T>* operator&();
+	dynamic_array<T>  operator*();
 
 	void push_back( T value );
-	void pop_back( void );
-	void clear( void );
+	void pop_back();
+	void clear();
 
 private:
 	void grow( void );
 private:
-	T *buffer_;               //буффер
-	unsigned int buffer_size_;//размер буффера
-	unsigned int real_size_;  //количество элементов в массиве
-	unsigned int initial_size_; //размер амортизированности массива
+	const unsigned int initial_size_ = 10; // размер амортизированности массива
+	unsigned int real_size_;               // количество элементов в массиве
+	unsigned int buffer_size_;             // размер буффера
+	T *buffer_;                            //буффер
+	T *current_item_;
 };
 
 #include "dynamic_array_impl.h"

@@ -1,50 +1,51 @@
 #ifndef _DYNAMIC_ARRAY_IML_H_
 #define _DYNAMIC_ARRAY_IML_H_
 
+#include <stdexcept>
 #include <string.h>
 #include <assert.h>
 
 template <typename T>
-dynamic_array<T>::dynamic_array( void ) : buffer_( 0 ), buffer_size_( 0 ), real_size_( 0 ), initial_size_( 10 ) {  }
+dynamic_array<T>::dynamic_array() : real_size_( 0 ), buffer_size_( real_size_ + initial_size_ ),
+									buffer_( new T[buffer_size_] ), current_item_( buffer_ ) { }
 
 template <typename T>
-dynamic_array<T>::dynamic_array( unsigned int real_size )
+dynamic_array<T>::dynamic_array( unsigned int real_size ) : real_size_( real_size ), buffer_size_( real_size_ + initial_size_),
+															buffer_( new T[buffer_size_] ), current_item_( buffer_ )
 {
 	assert( real_size > 0 );
-	real_size_ = real_size;
-	initial_size_ = 10;
-	buffer_size_ = real_size_ + initial_size_;
-	buffer_ = new T[buffer_size_];
-	memset( buffer_, 0x00, real_size_ );
+
+	memset( buffer_, 0x00, real_size_ * sizeof( T ) );
 }
 
 template <typename T>
 dynamic_array<T>::dynamic_array( const dynamic_array &copy)
 {
-	buffer_size_ = copy->buffer_size_;
-	real_size_ = copy->real_size_;
-	initial_size_ = copy->initial_size_;
+	buffer_size_ = copy.buffer_size_;
+	real_size_ = copy.real_size_;
 	buffer_ = new T[buffer_size_];
+	memcpy( buffer_, copy.buffer_, buffer_size_ * sizeof( T ) );
+	current_item_ = buffer_;
 }
 
 template <typename T>
 dynamic_array<T>& dynamic_array<T>::operator=( const dynamic_array<T> &copy )
 {
-	if( this != &(copy) )
+	if( this != &copy )
 	{
-		T *new_buffer = new T[copy->buffer_size_];
-		buffer_size_ = copy->buffer_size_;
-		real_size_ = copy->real_size_;
-		initial_size_ = copy->initial_size_;
-		memcpy( new_buffer, copy->buffer_, copy->real_size_ * sizeof( unsigned int ));
+		T *new_buffer = new T[copy.buffer_size_];
+		buffer_size_ = copy.buffer_size_;
+		real_size_ = copy.real_size_;
+		memcpy( new_buffer, copy.buffer_, copy.real_size_ * sizeof( T ) );
 		delete [] buffer_;
 		buffer_ = new_buffer;
+		current_item_ = buffer_;
 	}
 	return *this;
 }
 
 template <typename T>
-dynamic_array<T>::~dynamic_array( )
+dynamic_array<T>::~dynamic_array()
 {
 	if( buffer_ )
 	{
@@ -108,7 +109,7 @@ template <typename T>
 void dynamic_array<T>::erase( unsigned int i )
 {
 	assert( i >= 0 && i < real_size_ );
-	memcpy( &buffer_[i + 1], &buffer_[i], (real_size_-i -1)) ;
+	memcpy( &buffer_[i + 1], &buffer_[i], ( real_size_- i - 1 ) ) ;
 	real_size_--;
 }
 
@@ -120,13 +121,13 @@ T dynamic_array<T>::at( unsigned int i )const
 }
 
 template <typename T>
-dynamic_array<T>* dynamic_array<T>::operator&( )
+dynamic_array<T>* dynamic_array<T>::operator&()
 {
 	return this;
 }
 
 template <typename T>
-dynamic_array<T> dynamic_array<T>::operator*( )
+dynamic_array<T> dynamic_array<T>::operator*()
 {
 	return *this;
 }
@@ -139,6 +140,7 @@ T& dynamic_array<T>::operator[]( unsigned int i ) const
 	{
 		return buffer_[i];
 	}
+	throw std::runtime_error("");
 }
 
 template <typename T>
@@ -149,26 +151,27 @@ void dynamic_array<T>::push_back( T value )
 		grow();
 	}
 	assert( real_size_ < buffer_size_ );
-	buffer_[real_size_] = value;
+	memcpy( current_item_, &value, sizeof( T ) );
+	current_item_ += sizeof( T );
 	real_size_++;
 }
 
 template <typename T>
-void dynamic_array<T>::pop_back( void )
+void dynamic_array<T>::pop_back()
 {
 	buffer_[real_size_-1] = 0x00;
 	real_size_ --;
 }
 
 template <typename T>
-void dynamic_array<T>::clear( void )
+void dynamic_array<T>::clear()
 {
 	memset( buffer_, 0x00, real_size_ );
 	real_size_ = 0;
 }
 
 template <typename T>
-void dynamic_array<T>::grow( void )
+void dynamic_array<T>::grow()
 {
 	unsigned int new_buffer_size = 0;
 	if( ( buffer_size_ * 2 ) > initial_size_ )
@@ -180,7 +183,7 @@ void dynamic_array<T>::grow( void )
 		new_buffer_size = initial_size_;
 	}
 	T *new_buffer = new T[new_buffer_size];
-	memcpy( new_buffer, buffer_, real_size_ * sizeof( unsigned int ) );
+	memcpy( new_buffer, buffer_, real_size_ * sizeof( T ) );
 	delete buffer_;
 	buffer_ = new_buffer;
 	buffer_size_ = new_buffer_size;
