@@ -1,7 +1,9 @@
 #include "algorithms.h"
 
+#include <string>
 
-int fibonacci_numbers( unsigned int i )
+
+int fibonacci_numbers( size_t i )
 {
 	//результат
 	int res = -1;
@@ -44,7 +46,7 @@ bool is_number_prime( int n )
 	     b <= sqrt(n)
 	*/ 
 	//проверка на простоту достаточно осуществлять до sqrt(n)
-	for( int i = 2; i * i <= n; i++ )
+	for( size_t i = 2; i * i <= n; i++ )
 	{
 		if( n % i == 0 )
 		{
@@ -67,5 +69,58 @@ double power( double a, int n )
 		current_value = current_value * current_value;
 		n = n >> 1;
 	}
+	return res;
+}
+
+void str_invert( char* str, size_t len )
+{
+	for( size_t i = 0; i < ( size_t ) len/2; i++ )
+	{
+		std::swap( str[i], str[len - i - 1] );
+	}
+}
+
+bool is_binary_pow( int n )
+{
+	return ( ( n ) && ( ( n & ( n - 1 ) ) == 0 ) );
+}
+
+size_t units_count( int n )
+{
+	return 0;
+}
+
+size_t zero_count( int n )
+{
+	return 0;
+}
+
+std::vector<int> prime_factors( int n )
+{
+	std::vector<int> res( 0 );
+	if( n == 1 )
+	{
+		res.push_back( 1 );
+		return res;
+	}
+	for( int i = 2;  i <= n; )
+	{
+		if( n % i == 0 )
+		{
+			res.push_back( i );
+			n = n / i;
+			i = 2;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	return res;
+}
+
+int greatest_common_division( int a, int b )
+{
+	int res = 0;
 	return res;
 }

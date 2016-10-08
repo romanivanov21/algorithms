@@ -1,0 +1,10 @@
+/build/bin
+/build/CMakeCache.txt
+/build/CMakeFiles
+/build/cmake_install.cmake
+/build/Makefile
+*.swp
+/build/.idea
+/build/bin/algorithm
+*.pyc
+.idea
