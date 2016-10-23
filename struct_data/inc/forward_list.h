@@ -83,6 +83,14 @@ public:
         }
     }
 
+    forward_list( forward_list && other )
+    {
+        head_ = other.head_;
+        tail_ = other.tail_;
+        other.head_ = nullptr;
+        other.tail_ = nullptr;
+    }
+
 private:
     struct node
     {
