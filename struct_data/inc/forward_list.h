@@ -46,6 +46,27 @@ public:
             head_->next_ = temp;
         }
     }
+
+    void reverse()
+    {
+        node *curr = head_->next_;
+        node *prev = head_;
+        node *next_item = curr->next_;
+        while( curr != nullptr )
+        {
+            curr->next_ = prev;
+            prev = curr;
+            curr = next_item;
+            if( next_item != nullptr )
+            {
+                next_item = next_item->next_;
+            }
+        }
+        head_->next_ = nullptr;
+        tail_ = head_;
+        head_ = prev;
+    }
+
     void pop_front()
     {
         node *temp = head_;
