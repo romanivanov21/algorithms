@@ -5,6 +5,6 @@
 /build/Makefile
 *.swp
 /build/.idea
-/build/bin/algorithm
+/build/bin/algorithms
 *.pyc
-.idea
+

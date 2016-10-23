@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #The project name
-PROJECT="simple_algorithms"
+PROJECT="algorithms"
 
 #get current directory
 DIR=$(cd $(dirname $0) && pwd);
@@ -10,7 +10,7 @@ DIR=$(cd $(dirname $0) && pwd);
 BUILD_DIR="$DIR/build"
 
 cd "$BUILD_DIR/"
-BIN_DIR="$( cd ../../bin/ $(dirname $0) && pwd)"
+BIN_DIR="$( cd $(dirname $0) && pwd)/build/bin"
 cd ..
 
 #if folder build ton found 

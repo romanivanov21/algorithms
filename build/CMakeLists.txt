@@ -37,11 +37,20 @@ include_directories (
         ../sorting_algorithms/inc
         ../struct_data/inc
         )
+
 #файлы реализации программы algorithms
 aux_source_directory( ../                       ALGORITHMS_SRC )
 aux_source_directory( ../simple_algorithms/src  ALGORITHMS_SRC )
 aux_source_directory( ../sorting_algorithms/src ALGORITHMS_SRC )
 aux_source_directory( ../struct_data/src        ALGORITHMS_SRC )
 
+enable_testing()
+
+find_package ( Threads )
+
+find_package ( GTest )
+
 #исполняемый файл algorithms
-add_executable( algorithm ${ALGORITHMS_SRC} )
+add_executable( ${PROJECT} ${ALGORITHMS_SRC} )
+
+target_link_libraries( ${PROJECT} libgtest.a pthread )
